@@ -245,14 +245,16 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
 
     private void dichvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dichvuActionPerformed
         Parent.removeAll();
-        Parent.add(PnDichvu);
+        PnDichVu dv= new PnDichVu();
+        Parent.add(dv);
         Parent.revalidate();
         Parent.repaint();
     }//GEN-LAST:event_dichvuActionPerformed
 
     private void baocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baocaoActionPerformed
         Parent.removeAll();
-        Parent.add(PnBaoCao);
+        PnBaoCao bc= new PnBaoCao();
+        Parent.add(bc);
         Parent.revalidate();
         Parent.repaint();
     }//GEN-LAST:event_baocaoActionPerformed
@@ -274,7 +276,8 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
 
     private void hotroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotroActionPerformed
         Parent.removeAll();
-        Parent.add(PnHoTro);
+        PnHoTro ht= new PnHoTro();
+        Parent.add(ht);
         Parent.revalidate();
         Parent.repaint();
     }//GEN-LAST:event_hotroActionPerformed
