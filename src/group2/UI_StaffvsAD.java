@@ -5,6 +5,7 @@
 package group2;
 
 import java.awt.PopupMenu;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,8 +41,6 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         dangxuat = new javax.swing.JButton();
         Parent = new javax.swing.JPanel();
-        PnCamWeb = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +111,11 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
         dangxuat.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         dangxuat.setText("Đăng xuất");
         dangxuat.setPreferredSize(new java.awt.Dimension(70, 20));
+        dangxuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dangxuatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -173,41 +177,6 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
 
         Parent.setBackground(new java.awt.Color(255, 255, 255));
         Parent.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout PnCamWebLayout = new javax.swing.GroupLayout(PnCamWeb);
-        PnCamWeb.setLayout(PnCamWebLayout);
-        PnCamWebLayout.setHorizontalGroup(
-            PnCamWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-            .addGroup(PnCamWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PnCamWebLayout.createSequentialGroup()
-                    .addGap(450, 450, 450)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(450, Short.MAX_VALUE)))
-        );
-        PnCamWebLayout.setVerticalGroup(
-            PnCamWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-            .addGroup(PnCamWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PnCamWebLayout.createSequentialGroup()
-                    .addGap(210, 210, 210)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(210, Short.MAX_VALUE)))
-        );
-
-        Parent.add(PnCamWeb, "card6");
-
         jPanel1.add(Parent);
         Parent.setBounds(0, 80, 1000, 520);
 
@@ -237,7 +206,8 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
 
     private void maytramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maytramActionPerformed
         Parent.removeAll();
-        PnMayTram mt=new PnMayTram();
+        PnMayTram mt = new PnMayTram();
+        mt.displayDataFromDatabase();
         Parent.add(mt);
         Parent.revalidate();
         Parent.repaint();
@@ -245,7 +215,7 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
 
     private void dichvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dichvuActionPerformed
         Parent.removeAll();
-        PnDichVu dv= new PnDichVu();
+        PnDichVu dv = new PnDichVu();
         Parent.add(dv);
         Parent.revalidate();
         Parent.repaint();
@@ -253,7 +223,7 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
 
     private void baocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baocaoActionPerformed
         Parent.removeAll();
-        PnBaoCao bc= new PnBaoCao();
+        PnBaoCao bc = new PnBaoCao();
         Parent.add(bc);
         Parent.revalidate();
         Parent.repaint();
@@ -261,7 +231,8 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
 
     private void taikhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taikhoanActionPerformed
         Parent.removeAll();
-        PnTaiKhoan tk=new PnTaiKhoan();
+        PnTaiKhoan tk = new PnTaiKhoan();
+        tk.displayDataFromDatabase();
         Parent.add(tk);
         Parent.revalidate();
         Parent.repaint();
@@ -269,18 +240,26 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
 
     private void camwebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_camwebActionPerformed
         Parent.removeAll();
-        Parent.add(PnCamWeb);
+        PnCamWeb cw = new PnCamWeb();
+        Parent.add(cw);
         Parent.revalidate();
         Parent.repaint();
     }//GEN-LAST:event_camwebActionPerformed
 
     private void hotroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotroActionPerformed
         Parent.removeAll();
-        PnHoTro ht= new PnHoTro();
+        PnHoTro ht = new PnHoTro();
         Parent.add(ht);
         Parent.revalidate();
         Parent.repaint();
     }//GEN-LAST:event_hotroActionPerformed
+
+    private void dangxuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dangxuatActionPerformed
+        // Mã xử lý đăng xuất
+        JOptionPane.showMessageDialog(this, "Bạn đã đăng xuất");
+        // Thêm mã để đóng cửa sổ hoặc chuyển đến cửa sổ đăng nhập
+        this.dispose(); // Đóng cửa sổ hiện tại (nếu đó là cửa sổ đăng nhập)
+    }//GEN-LAST:event_dangxuatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,7 +298,6 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Parent;
-    private javax.swing.JPanel PnCamWeb;
     private javax.swing.JButton baocao;
     private javax.swing.JButton camweb;
     private javax.swing.JButton dangxuat;
@@ -327,7 +305,6 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
     private javax.swing.JButton hotro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton maytram;

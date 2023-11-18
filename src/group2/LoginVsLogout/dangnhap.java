@@ -169,8 +169,8 @@ public class dangnhap extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonExitActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        String username = userNameField.getText();
-        String password = passwordField.getText();
+            String username = userNameField.getText().trim();
+            String password = passwordField.getText().trim();
         if (!username.equals("") && !password.equals("")) {
             Boolean check = accoutControl.login(username, password);
             if (check == true) {

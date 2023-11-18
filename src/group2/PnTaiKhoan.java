@@ -4,18 +4,91 @@
  */
 package group2;
 
+import java.awt.Component;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author ADMIN
  */
 public class PnTaiKhoan extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PnTaiKhoan
-     */
+    private final String url = "jdbc:mysql://localhost:3306/managercenntergaming";
+    private final String user = "root";
+    private final String password = "Nhan2792003@";
     public PnTaiKhoan() {
         initComponents();
     }
+    void displayDataFromDatabase(){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+        String sql = "SELECT m.computer_id, kh.customer_name, kh.remaining_time, m.status, kh.GhiChu " +
+                     "FROM computers m " +
+                     "JOIN customers kh ON m.computer_id = kh.ID_may";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                DefaultTableModel model = new DefaultTableModel();
+                model.addColumn("ID Máy");
+                model.addColumn("Tên Khách Hàng");
+                model.addColumn("Thời Gian Còn Lại");
+                model.addColumn("Trạng Thái");
+                model.addColumn("Ghi Chú");
+                JTable table = new JTable(model);
+
+                // Add more columns as needed
+                while (resultSet.next()) {
+                    String column1Value = resultSet.getString("computer_id");
+                    String column2Value = resultSet.getString("customer_name");
+                    String column3Value = resultSet.getString("remaining_time");
+                    String column4Value = resultSet.getString("status");
+                    String column5Value = resultSet.getString("GhiChu");
+
+                    model.addRow(new Object[]{column1Value, column2Value, column3Value, column4Value, column5Value});
+                }
+
+                jTable2.setModel(model);
+
+// Tính toán tỷ lệ cho từng cột
+                    int columnCount = jTable2.getColumnCount();
+                    int[] columnWidths = new int[columnCount];
+
+                    for (int i = 0; i < columnCount; i++) {
+                        TableColumn column = jTable2.getColumnModel().getColumn(i);
+                        int maxWidth = 0;
+
+                        // Lặp qua từng dòng và tính toán độ dài lớn nhất của cột
+                        for (int j = 0; j < jTable2.getRowCount(); j++) {
+                            TableCellRenderer cellRenderer = jTable2.getCellRenderer(j, i);
+                            Object value = jTable2.getValueAt(j, i);
+                            Component cellComponent = cellRenderer.getTableCellRendererComponent(jTable2, value, false, false, j, i);
+                            maxWidth = Math.max(maxWidth, cellComponent.getPreferredSize().width);
+                        }
+
+                        // Gán kích thước ước lượng của cột
+                        columnWidths[i] = maxWidth;
+                    }
+
+// Tính tỷ lệ dựa trên tổng kích thước của JTable
+                    int totalWidth = jTable2.getWidth();
+
+// Gán kích thước ước lượng cho từng cột với tỷ lệ phù hợp
+                    for (int i = 0; i < columnCount; i++) {
+                        TableColumn column = jTable2.getColumnModel().getColumn(i);
+                        int columnWidth = (int) ((double) columnWidths[i] / totalWidth * totalWidth);
+                        column.setPreferredWidth(columnWidth);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -212,7 +285,8 @@ public class PnTaiKhoan extends javax.swing.JPanel {
 
     private void BTxoataikhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTxoataikhoanActionPerformed
         cacPanel.removeAll();
-        cacPanel.add(Xoataikhoan);
+        displayDataFromDatabase();
+        cacPanel.add(Xoataikhoan); 
         cacPanel.revalidate();
         cacPanel.repaint();
     }//GEN-LAST:event_BTxoataikhoanActionPerformed

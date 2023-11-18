@@ -28,60 +28,78 @@ public class PnDichVu extends javax.swing.JPanel {
 
         PnDichvu = new javax.swing.JPanel();
         nutDichvu = new javax.swing.JPanel();
+        BTmenu = new javax.swing.JButton();
+        BTxoa = new javax.swing.JButton();
+        BTthem = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+
+        setPreferredSize(new java.awt.Dimension(1000, 520));
 
         nutDichvu.setPreferredSize(new java.awt.Dimension(1000, 50));
+        nutDichvu.setLayout(null);
 
-        javax.swing.GroupLayout nutDichvuLayout = new javax.swing.GroupLayout(nutDichvu);
-        nutDichvu.setLayout(nutDichvuLayout);
-        nutDichvuLayout.setHorizontalGroup(
-            nutDichvuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-        );
-        nutDichvuLayout.setVerticalGroup(
-            nutDichvuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
+        BTmenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BTmenu.setText("Menu");
+        nutDichvu.add(BTmenu);
+        BTmenu.setBounds(20, 10, 140, 27);
+
+        BTxoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BTxoa.setText("Xóa");
+        nutDichvu.add(BTxoa);
+        BTxoa.setBounds(320, 10, 140, 27);
+
+        BTthem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BTthem.setText("Thêm");
+        nutDichvu.add(BTthem);
+        BTthem.setBounds(170, 10, 140, 27);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 470));
+        jPanel1.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout PnDichvuLayout = new javax.swing.GroupLayout(PnDichvu);
         PnDichvu.setLayout(PnDichvuLayout);
         PnDichvuLayout.setHorizontalGroup(
             PnDichvuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnDichvuLayout.createSequentialGroup()
-                .addComponent(nutDichvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PnDichvuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nutDichvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         PnDichvuLayout.setVerticalGroup(
             PnDichvuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnDichvuLayout.createSequentialGroup()
                 .addComponent(nutDichvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(470, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PnDichvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PnDichvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PnDichvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PnDichvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTmenu;
+    private javax.swing.JButton BTthem;
+    private javax.swing.JButton BTxoa;
     private javax.swing.JPanel PnDichvu;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel nutDichvu;
     // End of variables declaration//GEN-END:variables
 }
