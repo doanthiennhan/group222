@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package group2;
+package UserInterFace;
 
 import java.awt.Component;
 import java.sql.Connection;
@@ -30,7 +30,7 @@ public class PnMayTram extends javax.swing.JPanel {
 
     void displayDataFromDatabase() {
     try (Connection connection = DriverManager.getConnection(url, user, password)) {
-        String sql = "SELECT m.computer_id, kh.customer_name, kh.remaining_time, m.status, kh.GhiChu " +
+        String sql = "SELECT m.computer_id, kh.customer_name, kh.remaining_amount, m.status, kh.GhiChu " +
                      "FROM computers m " +
                      "JOIN customers kh ON m.computer_id = kh.ID_may";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -47,7 +47,7 @@ public class PnMayTram extends javax.swing.JPanel {
                 while (resultSet.next()) {
                     String column1Value = resultSet.getString("computer_id");
                     String column2Value = resultSet.getString("customer_name");
-                    String column3Value = resultSet.getString("remaining_time");
+                    String column3Value = resultSet.getString("remaining_amount");
                     String column4Value = resultSet.getString("status");
                     String column5Value = resultSet.getString("GhiChu");
 
@@ -146,21 +146,16 @@ public class PnMayTram extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(maytrampanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(maytrampanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(maytrampanel, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(maytrampanel, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

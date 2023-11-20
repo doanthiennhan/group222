@@ -1,5 +1,5 @@
 
-package group2;
+package UserInterFace;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -13,19 +13,19 @@ import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 
-public class BangDieuKhien extends javax.swing.JFrame {
+public class UI_Customers extends javax.swing.JFrame {
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
-    public BangDieuKhien() {
+    public UI_Customers() {
         initComponents();
         initcustom();
     }
-    BangDieuKhien bangDieuKhien;
+    UI_Customers bangDieuKhien;
 
 // ...
 
 private void showBangDieuKhien() {
-    bangDieuKhien = new BangDieuKhien();
+    bangDieuKhien = new UI_Customers();
     bangDieuKhien.setVisible(true);
     // Đóng cửa sổ đăng nhập nếu cần thiết
     SwingUtilities.getWindowAncestor(this).dispose();
@@ -263,7 +263,7 @@ private void showBangDieuKhien() {
             // TODO add your handling code here:
             Runtime.getRuntime().exec("c:/windows/system32/rundll32.exe user32.dll, LockWorkStation");
         } catch (IOException ex) {
-            Logger.getLogger(BangDieuKhien.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UI_Customers.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -279,7 +279,7 @@ private void showBangDieuKhien() {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BangDieuKhien().setVisible(true);
+                new UI_Customers().setVisible(true);
             }
         });
     }

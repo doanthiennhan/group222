@@ -2,17 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package group2;
+package UserInterFace;
 
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import java.sql.SQLException;
+import javax.swing.event.ListSelectionEvent;
+
 /**
  *
  * @author ADMIN
@@ -22,50 +26,51 @@ public class PnTaiKhoan extends javax.swing.JPanel {
     private final String url = "jdbc:mysql://localhost:3306/managercenntergaming";
     private final String user = "root";
     private final String password = "Nhan2792003@";
+
     public PnTaiKhoan() {
         initComponents();
     }
-    void displayDataFromDatabase(){
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
-        String sql = "SELECT m.computer_id, kh.customer_name, kh.remaining_time, m.status, kh.GhiChu " +
-                     "FROM computers m " +
-                     "JOIN customers kh ON m.computer_id = kh.ID_may";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            try (ResultSet resultSet = statement.executeQuery()) {
-                DefaultTableModel model = new DefaultTableModel();
-                model.addColumn("ID Máy");
-                model.addColumn("Tên Khách Hàng");
-                model.addColumn("Thời Gian Còn Lại");
-                model.addColumn("Trạng Thái");
-                model.addColumn("Ghi Chú");
-                JTable table = new JTable(model);
 
-                // Add more columns as needed
-                while (resultSet.next()) {
-                    String column1Value = resultSet.getString("computer_id");
-                    String column2Value = resultSet.getString("customer_name");
-                    String column3Value = resultSet.getString("remaining_time");
-                    String column4Value = resultSet.getString("status");
-                    String column5Value = resultSet.getString("GhiChu");
+    void displayDataFromDatabase() {
+        int dem = 1;
+        try ( Connection connection = DriverManager.getConnection(url, user, password)) {
+            String sql = "SELECT kh.username, kh.remaining_amount, kh.GhiChu "
+                    + "FROM customers kh ";
 
-                    model.addRow(new Object[]{column1Value, column2Value, column3Value, column4Value, column5Value});
-                }
+            try ( PreparedStatement statement = connection.prepareStatement(sql)) {
+                try ( ResultSet resultSet = statement.executeQuery()) {
+                    DefaultTableModel model = new DefaultTableModel();
+                    model.addColumn("stt");
+                    model.addColumn("tên tài khoản");
+                    model.addColumn("số tiền còn lại ");
+                    model.addColumn("Ghi Chú");
+                    JTable table = new JTable(model);
 
-                jTable2.setModel(model);
+                    // Add more columns as needed
+                    while (resultSet.next()) {
+                        String column1Value = String.valueOf(dem++);
+                        String column2Value = resultSet.getString("username");
+                        String column3Value = resultSet.getString("remaining_amount");
+                        String column4Value = resultSet.getString("GhiChu");
+
+                        model.addRow(new Object[]{column1Value, column2Value, column3Value, column4Value});
+                    }
+
+                    TableTaiKhoan.setModel(model);
 
 // Tính toán tỷ lệ cho từng cột
-                    int columnCount = jTable2.getColumnCount();
+                    int columnCount = TableTaiKhoan.getColumnCount();
                     int[] columnWidths = new int[columnCount];
 
                     for (int i = 0; i < columnCount; i++) {
-                        TableColumn column = jTable2.getColumnModel().getColumn(i);
+                        TableColumn column = TableTaiKhoan.getColumnModel().getColumn(i);
                         int maxWidth = 0;
 
                         // Lặp qua từng dòng và tính toán độ dài lớn nhất của cột
-                        for (int j = 0; j < jTable2.getRowCount(); j++) {
-                            TableCellRenderer cellRenderer = jTable2.getCellRenderer(j, i);
-                            Object value = jTable2.getValueAt(j, i);
-                            Component cellComponent = cellRenderer.getTableCellRendererComponent(jTable2, value, false, false, j, i);
+                        for (int j = 0; j < TableTaiKhoan.getRowCount(); j++) {
+                            TableCellRenderer cellRenderer = TableTaiKhoan.getCellRenderer(j, i);
+                            Object value = TableTaiKhoan.getValueAt(j, i);
+                            Component cellComponent = cellRenderer.getTableCellRendererComponent(TableTaiKhoan, value, false, false, j, i);
                             maxWidth = Math.max(maxWidth, cellComponent.getPreferredSize().width);
                         }
 
@@ -74,11 +79,11 @@ public class PnTaiKhoan extends javax.swing.JPanel {
                     }
 
 // Tính tỷ lệ dựa trên tổng kích thước của JTable
-                    int totalWidth = jTable2.getWidth();
+                    int totalWidth = TableTaiKhoan.getWidth();
 
 // Gán kích thước ước lượng cho từng cột với tỷ lệ phù hợp
                     for (int i = 0; i < columnCount; i++) {
-                        TableColumn column = jTable2.getColumnModel().getColumn(i);
+                        TableColumn column = TableTaiKhoan.getColumnModel().getColumn(i);
                         int columnWidth = (int) ((double) columnWidths[i] / totalWidth * totalWidth);
                         column.setPreferredWidth(columnWidth);
                     }
@@ -88,7 +93,140 @@ public class PnTaiKhoan extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
+    private boolean isUsernameExists(String taiKhoan) {
+        // Thực hiện truy vấn kiểm tra xem tên đăng nhập đã tồn tại trong cơ sở dữ liệu chưa
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            String query = "SELECT COUNT(*) FROM customers WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, taiKhoan);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+            int count = resultSet.getInt(1);
+
+            // Đóng kết nối
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+
+            // Nếu count > 0, tên đăng nhập đã tồn tại
+            return count > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+            return false;
+        }
+    }
+
+    public static boolean isInteger(String input) {
+        try {
+            // Chuyển đổi chuỗi thành số nguyên
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            // Nếu không thể chuyển đổi thành số nguyên, trả về false
+            return false;
+        }
+    }
+
+    private void createAccount() {
+        String taiKhoan = TFnhapTaiKhoan.getText();
+        String matKhau = TFnhapMatKhau.getText();
+        String nhapLaiMK = TFnhapLạiMK.getText();
+        String soDienThoai = TFnhapSDT.getText();
+        String soTienNap = TFnhapSoTien.getText();
+        if ((!matKhau.equals("") && !taiKhoan.equals("") && !nhapLaiMK.equals("") && !soDienThoai.equals("") && !soTienNap.equals("")) == false) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
+            return;
+        }
+        // Kiểm tra xem mật khẩu và nhập lại mật khẩu có khớp không
+        if (!matKhau.equals(nhapLaiMK)) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu và nhập lại mật khẩu không khớp");
+            return;
+        }
+        if ((isInteger(soDienThoai) && isInteger(soTienNap)) == false) {
+            JOptionPane.showMessageDialog(this, "nhập sai số điện thoại hoặc số tiền nạp");
+            return;
+        }
+        if (isUsernameExists(taiKhoan)) {
+            JOptionPane.showMessageDialog(this, "Tên tài khoản đã tồn tại");
+            return;
+        }
+
+        // Kết nối đến cơ sở dữ liệu và thêm thông tin tài khoản
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            String query = "INSERT INTO customers (username, password, phone_number, remaining_amount) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, taiKhoan);
+            preparedStatement.setString(2, matKhau);
+            preparedStatement.setString(3, soDienThoai);
+            preparedStatement.setString(4, soTienNap);
+
+            int result = preparedStatement.executeUpdate();
+
+            if (result > 0) {
+                JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công");
+                // Thêm mã xử lý thêm tài khoản thành công nếu cần
+            } else {
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi tạo tài khoản");
+            }
+
+            // Đóng kết nối
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+        }
+    }
+
+    // Biến instance để lưu trữ ID_khachhang được chọn
+   
+
+// Sự kiện chọn hàng cho JTable (đặt nó trong phương thức khởi tạo hoặc nơi khác phù hợp)
+// Phương thức xóa khách hàng
+    private void deleteSelectedCustomer() {
+        int selectedRow = TableTaiKhoan.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hàng để xóa.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String selectedUsername = TableTaiKhoan.getValueAt(selectedRow, 1).toString(); // Giả sử cột "username" là cột đầu tiên
+
+        int Click = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa khách hàng này hay không?", "Thông Báo", JOptionPane.YES_NO_OPTION);
+
+        if (Click == JOptionPane.YES_OPTION && selectedUsername != null) {
+            try ( Connection connection = DriverManager.getConnection(url, user, password)) {
+                String sql = "DELETE FROM customers WHERE username = ?";
+
+                try ( PreparedStatement statement = connection.prepareStatement(sql)) {
+                    statement.setString(1, selectedUsername);
+
+                    int rowsDeleted = statement.executeUpdate();
+
+                    if (rowsDeleted > 0) {
+                        JOptionPane.showMessageDialog(null, "Khách hàng đã được xóa thành công!");
+                        // Gọi lại phương thức hiển thị dữ liệu và làm sạch các trường
+                        displayDataFromDatabase();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng để xóa!");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi xóa khách hàng!");
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,7 +244,7 @@ public class PnTaiKhoan extends javax.swing.JPanel {
         BTtaotaikhoan = new javax.swing.JButton();
         cacPanel = new javax.swing.JPanel();
         tatcataikhoan = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TableTaiKhoan = new javax.swing.JTable();
         Taotaikhoan = new javax.swing.JPanel();
         lableNhapTaiKhoan = new javax.swing.JLabel();
         TFnhapTaiKhoan = new javax.swing.JTextField();
@@ -119,8 +257,7 @@ public class PnTaiKhoan extends javax.swing.JPanel {
         TFnhapSoTien = new javax.swing.JTextField();
         lableSoTienNap = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        Xoataikhoan = new javax.swing.JPanel();
+        TaoTaiKhoan = new javax.swing.JButton();
 
         cacNuttaikhoan.setPreferredSize(new java.awt.Dimension(1000, 50));
         cacNuttaikhoan.setLayout(null);
@@ -159,7 +296,7 @@ public class PnTaiKhoan extends javax.swing.JPanel {
 
         tatcataikhoan.setPreferredSize(new java.awt.Dimension(1000, 470));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TableTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -170,7 +307,7 @@ public class PnTaiKhoan extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tatcataikhoan.setViewportView(jTable2);
+        tatcataikhoan.setViewportView(TableTaiKhoan);
 
         cacPanel.add(tatcataikhoan, "card2");
 
@@ -180,6 +317,12 @@ public class PnTaiKhoan extends javax.swing.JPanel {
         lableNhapTaiKhoan.setText("Nhập tài khoản");
         Taotaikhoan.add(lableNhapTaiKhoan);
         lableNhapTaiKhoan.setBounds(340, 50, 130, 20);
+
+        TFnhapTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFnhapTaiKhoanActionPerformed(evt);
+            }
+        });
         Taotaikhoan.add(TFnhapTaiKhoan);
         TFnhapTaiKhoan.setBounds(500, 40, 250, 30);
 
@@ -214,31 +357,26 @@ public class PnTaiKhoan extends javax.swing.JPanel {
         jButton4.setBackground(new java.awt.Color(153, 153, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton4.setText("Nhập lại");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         Taotaikhoan.add(jButton4);
         jButton4.setBounds(640, 250, 110, 30);
 
-        jButton5.setBackground(new java.awt.Color(0, 153, 255));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setText("Xác nhận");
-        Taotaikhoan.add(jButton5);
-        jButton5.setBounds(500, 250, 110, 30);
+        TaoTaiKhoan.setBackground(new java.awt.Color(0, 153, 255));
+        TaoTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TaoTaiKhoan.setText("Xác nhận");
+        TaoTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TaoTaiKhoanActionPerformed(evt);
+            }
+        });
+        Taotaikhoan.add(TaoTaiKhoan);
+        TaoTaiKhoan.setBounds(500, 250, 110, 30);
 
         cacPanel.add(Taotaikhoan, "card3");
-
-        Xoataikhoan.setPreferredSize(new java.awt.Dimension(1000, 470));
-
-        javax.swing.GroupLayout XoataikhoanLayout = new javax.swing.GroupLayout(Xoataikhoan);
-        Xoataikhoan.setLayout(XoataikhoanLayout);
-        XoataikhoanLayout.setHorizontalGroup(
-            XoataikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1006, Short.MAX_VALUE)
-        );
-        XoataikhoanLayout.setVerticalGroup(
-            XoataikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
-        );
-
-        cacPanel.add(Xoataikhoan, "card4");
 
         javax.swing.GroupLayout PnTaikhoanLayout = new javax.swing.GroupLayout(PnTaikhoan);
         PnTaikhoan.setLayout(PnTaikhoanLayout);
@@ -284,11 +422,7 @@ public class PnTaiKhoan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTxoataikhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTxoataikhoanActionPerformed
-        cacPanel.removeAll();
-        displayDataFromDatabase();
-        cacPanel.add(Xoataikhoan); 
-        cacPanel.revalidate();
-        cacPanel.repaint();
+        deleteSelectedCustomer();
     }//GEN-LAST:event_BTxoataikhoanActionPerformed
 
     private void BTtatcataikhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTtatcataikhoanActionPerformed
@@ -305,6 +439,22 @@ public class PnTaiKhoan extends javax.swing.JPanel {
         cacPanel.repaint();
     }//GEN-LAST:event_BTtaotaikhoanActionPerformed
 
+    private void TaoTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaoTaiKhoanActionPerformed
+        createAccount();
+    }//GEN-LAST:event_TaoTaiKhoanActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        TFnhapTaiKhoan.setText("");
+        TFnhapMatKhau.setText("");
+        TFnhapSDT.setText("");
+        TFnhapSoTien.setText("");
+        TFnhapLạiMK.setText("");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void TFnhapTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnhapTaiKhoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TFnhapTaiKhoanActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTtaotaikhoan;
@@ -316,13 +466,12 @@ public class PnTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JTextField TFnhapSDT;
     private javax.swing.JTextField TFnhapSoTien;
     private javax.swing.JTextField TFnhapTaiKhoan;
+    private javax.swing.JTable TableTaiKhoan;
+    private javax.swing.JButton TaoTaiKhoan;
     private javax.swing.JPanel Taotaikhoan;
-    private javax.swing.JPanel Xoataikhoan;
     private javax.swing.JPanel cacNuttaikhoan;
     private javax.swing.JPanel cacPanel;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lableNhapLaiMK;
     private javax.swing.JLabel lableNhapMatKhau;
     private javax.swing.JLabel lableNhapTaiKhoan;

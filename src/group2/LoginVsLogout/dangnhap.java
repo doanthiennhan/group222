@@ -4,8 +4,8 @@
  */
 package group2.LoginVsLogout;
 
-import group2.AccountControl;
-import group2.BangDieuKhien;
+import UserInterFace.AccountControl;
+import UserInterFace.UI_Customers;
 import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import javax.swing.SwingUtilities;
@@ -17,9 +17,9 @@ import javax.swing.SwingUtilities;
 public class dangnhap extends javax.swing.JPanel {
 
     AccountControl accoutControl;
-    private BangDieuKhien bandieukhien;
+    private UI_Customers bandieukhien;
     private void showBangDieuKhien(){
-        bandieukhien = new BangDieuKhien();
+        bandieukhien = new UI_Customers();
         bandieukhien.setVisible(true);
         // Đóng cửa sổ đăng nhập nếu cần thiết
         SwingUtilities.getWindowAncestor(this).dispose();

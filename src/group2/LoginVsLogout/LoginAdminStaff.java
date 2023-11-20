@@ -4,8 +4,10 @@
  */
 package group2.LoginVsLogout;
 
-import group2.AccountControl;
+import UserInterFace.AccountControl;
+import UserInterFace.UI_StaffvsAD;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -14,6 +16,14 @@ import javax.swing.JOptionPane;
 public class LoginAdminStaff extends javax.swing.JPanel {
 
     AccountControl accoutControl;
+    private UI_StaffvsAD bangdieukhien;
+    public String table="";
+    private void showBangDieuKhien(){
+        bangdieukhien = new UI_StaffvsAD();
+        bangdieukhien.setVisible(true);
+        // Đóng cửa sổ đăng nhập nếu cần thiết
+        SwingUtilities.getWindowAncestor(this).dispose();
+    }
     public LoginAdminStaff() {
         initComponents();
         accoutControl =new AccountControl();
@@ -191,17 +201,24 @@ public class LoginAdminStaff extends javax.swing.JPanel {
     }//GEN-LAST:event_ForgetPasswordButtonActionPerformed
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        String username = userNameField.getText();
-        String password = passwordField.getText();
-        String table;
+        String username = userNameField.getText().trim();
+        String password = passwordField.getText().trim();
+        
         if(adminToggleButton.isSelected()){
             table="admin";
         }
-        else table="staff";
+        if (staffToggleButton.isSelected()) {
+            table="staff";
+        }
+        if(table.equals("")) {
+            JOptionPane.showMessageDialog(this, "Bạn hãy chọn tư cách đăng nhập");
+            return;
+        }
         if (!username.equals("") && !password.equals("")) {
             Boolean check = accoutControl.loginaADStaff(username, password, table);
             if (check == true) {
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
+                showBangDieuKhien();
             } else {
                 JOptionPane.showConfirmDialog(this, "username hoặc password không đúng", "lỗi", JOptionPane.ERROR_MESSAGE);
             }
