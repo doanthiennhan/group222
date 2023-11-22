@@ -31,8 +31,7 @@ public class PnMayTram extends javax.swing.JPanel {
     void displayDataFromDatabase() {
     try (Connection connection = DriverManager.getConnection(url, user, password)) {
         String sql = "SELECT m.computer_id, kh.customer_name, kh.remaining_amount, m.status, kh.GhiChu " +
-                     "FROM computers m " +
-                     "JOIN customers kh ON m.computer_id = kh.ID_may";
+                     "FROM computers m, customers kh";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 DefaultTableModel model = new DefaultTableModel();
@@ -53,7 +52,7 @@ public class PnMayTram extends javax.swing.JPanel {
 
                     model.addRow(new Object[]{column1Value, column2Value, column3Value, column4Value, column5Value});
                 }
-
+                jTable1.setEnabled(false);
                 jTable1.setModel(model);
 
 // Tính toán tỷ lệ cho từng cột
@@ -128,6 +127,9 @@ public class PnMayTram extends javax.swing.JPanel {
 
         maytrampanel = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+
+        setLayout(null);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,25 +144,17 @@ public class PnMayTram extends javax.swing.JPanel {
         ));
         maytrampanel.setViewportView(jTable1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(maytrampanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(maytrampanel, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        add(maytrampanel);
+        maytrampanel.setBounds(50, 60, 930, 400);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Y2meta.app - Ảnh động (Zed tử thần không gian) cực chất(720p) (1).gif"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(30, 0, 1090, 520);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTable jTable1;
     private javax.swing.JScrollPane maytrampanel;
     // End of variables declaration//GEN-END:variables

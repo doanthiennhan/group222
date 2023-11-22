@@ -39,7 +39,13 @@ public class PnTaiKhoan extends javax.swing.JPanel {
 
             try ( PreparedStatement statement = connection.prepareStatement(sql)) {
                 try ( ResultSet resultSet = statement.executeQuery()) {
-                    DefaultTableModel model = new DefaultTableModel();
+                    DefaultTableModel model = new DefaultTableModel(){
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        // Chỉ cho phép sửa cột "Ghi Chú" (cột 3)
+                        return column == 3;
+                    }
+                    };
                     model.addColumn("stt");
                     model.addColumn("tên tài khoản");
                     model.addColumn("số tiền còn lại ");
@@ -55,7 +61,7 @@ public class PnTaiKhoan extends javax.swing.JPanel {
 
                         model.addRow(new Object[]{column1Value, column2Value, column3Value, column4Value});
                     }
-
+                    TableTaiKhoan.setEnabled(true);
                     TableTaiKhoan.setModel(model);
 
 // Tính toán tỷ lệ cho từng cột
@@ -242,7 +248,9 @@ public class PnTaiKhoan extends javax.swing.JPanel {
         BTxoataikhoan = new javax.swing.JButton();
         BTtatcataikhoan = new javax.swing.JButton();
         BTtaotaikhoan = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         cacPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         tatcataikhoan = new javax.swing.JScrollPane();
         TableTaiKhoan = new javax.swing.JTable();
         Taotaikhoan = new javax.swing.JPanel();
@@ -258,10 +266,12 @@ public class PnTaiKhoan extends javax.swing.JPanel {
         lableSoTienNap = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         TaoTaiKhoan = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         cacNuttaikhoan.setPreferredSize(new java.awt.Dimension(1000, 50));
         cacNuttaikhoan.setLayout(null);
 
+        BTxoataikhoan.setBackground(new java.awt.Color(204, 255, 255));
         BTxoataikhoan.setText("Xóa tài khoản");
         BTxoataikhoan.setPreferredSize(new java.awt.Dimension(75, 30));
         BTxoataikhoan.addActionListener(new java.awt.event.ActionListener() {
@@ -270,8 +280,9 @@ public class PnTaiKhoan extends javax.swing.JPanel {
             }
         });
         cacNuttaikhoan.add(BTxoataikhoan);
-        BTxoataikhoan.setBounds(320, 10, 129, 30);
+        BTxoataikhoan.setBounds(550, 10, 129, 30);
 
+        BTtatcataikhoan.setBackground(new java.awt.Color(204, 255, 255));
         BTtatcataikhoan.setText("Tất cả tài khoản");
         BTtatcataikhoan.setPreferredSize(new java.awt.Dimension(75, 30));
         BTtatcataikhoan.addActionListener(new java.awt.event.ActionListener() {
@@ -280,8 +291,9 @@ public class PnTaiKhoan extends javax.swing.JPanel {
             }
         });
         cacNuttaikhoan.add(BTtatcataikhoan);
-        BTtatcataikhoan.setBounds(10, 10, 128, 31);
+        BTtatcataikhoan.setBounds(240, 10, 128, 31);
 
+        BTtaotaikhoan.setBackground(new java.awt.Color(204, 255, 255));
         BTtaotaikhoan.setText("Tạo tài khoản");
         BTtaotaikhoan.setPreferredSize(new java.awt.Dimension(75, 30));
         BTtaotaikhoan.addActionListener(new java.awt.event.ActionListener() {
@@ -290,14 +302,58 @@ public class PnTaiKhoan extends javax.swing.JPanel {
             }
         });
         cacNuttaikhoan.add(BTtaotaikhoan);
-        BTtaotaikhoan.setBounds(160, 10, 128, 30);
+        BTtaotaikhoan.setBounds(390, 10, 128, 30);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/anh2.gif"))); // NOI18N
+        cacNuttaikhoan.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1000, 50);
 
         cacPanel.setLayout(new java.awt.CardLayout());
 
+        jPanel1.setLayout(null);
+
+        tatcataikhoan.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        tatcataikhoan.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         tatcataikhoan.setPreferredSize(new java.awt.Dimension(1000, 470));
 
         TableTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -309,50 +365,67 @@ public class PnTaiKhoan extends javax.swing.JPanel {
         ));
         tatcataikhoan.setViewportView(TableTaiKhoan);
 
-        cacPanel.add(tatcataikhoan, "card2");
+        jPanel1.add(tatcataikhoan);
+        tatcataikhoan.setBounds(30, 30, 960, 400);
+
+        cacPanel.add(jPanel1, "card4");
 
         Taotaikhoan.setLayout(null);
 
         lableNhapTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lableNhapTaiKhoan.setForeground(new java.awt.Color(255, 255, 0));
         lableNhapTaiKhoan.setText("Nhập tài khoản");
         Taotaikhoan.add(lableNhapTaiKhoan);
-        lableNhapTaiKhoan.setBounds(340, 50, 130, 20);
+        lableNhapTaiKhoan.setBounds(270, 120, 130, 20);
 
+        TFnhapTaiKhoan.setBackground(new java.awt.Color(153, 255, 255));
         TFnhapTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TFnhapTaiKhoanActionPerformed(evt);
             }
         });
         Taotaikhoan.add(TFnhapTaiKhoan);
-        TFnhapTaiKhoan.setBounds(500, 40, 250, 30);
+        TFnhapTaiKhoan.setBounds(430, 110, 250, 30);
 
         lableNhapMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lableNhapMatKhau.setForeground(new java.awt.Color(255, 255, 0));
         lableNhapMatKhau.setText("Nhập mật khẩu");
         Taotaikhoan.add(lableNhapMatKhau);
-        lableNhapMatKhau.setBounds(340, 90, 130, 20);
+        lableNhapMatKhau.setBounds(270, 160, 130, 20);
+
+        TFnhapMatKhau.setBackground(new java.awt.Color(153, 255, 255));
         Taotaikhoan.add(TFnhapMatKhau);
-        TFnhapMatKhau.setBounds(500, 80, 250, 30);
+        TFnhapMatKhau.setBounds(430, 150, 250, 30);
+
+        TFnhapLạiMK.setBackground(new java.awt.Color(153, 255, 255));
         Taotaikhoan.add(TFnhapLạiMK);
-        TFnhapLạiMK.setBounds(500, 120, 250, 30);
+        TFnhapLạiMK.setBounds(430, 190, 250, 30);
 
         lableNhapLaiMK.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lableNhapLaiMK.setForeground(new java.awt.Color(255, 255, 0));
         lableNhapLaiMK.setText("Nhập lại mật khẩu");
         Taotaikhoan.add(lableNhapLaiMK);
-        lableNhapLaiMK.setBounds(340, 130, 130, 22);
+        lableNhapLaiMK.setBounds(270, 200, 130, 22);
+
+        TFnhapSDT.setBackground(new java.awt.Color(153, 255, 255));
         Taotaikhoan.add(TFnhapSDT);
-        TFnhapSDT.setBounds(500, 160, 250, 30);
+        TFnhapSDT.setBounds(430, 230, 250, 30);
 
         lableSDT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lableSDT.setForeground(new java.awt.Color(255, 255, 0));
         lableSDT.setText("Số điện thoại");
         Taotaikhoan.add(lableSDT);
-        lableSDT.setBounds(340, 170, 130, 20);
+        lableSDT.setBounds(270, 240, 130, 20);
+
+        TFnhapSoTien.setBackground(new java.awt.Color(153, 255, 255));
         Taotaikhoan.add(TFnhapSoTien);
-        TFnhapSoTien.setBounds(500, 200, 250, 30);
+        TFnhapSoTien.setBounds(430, 270, 250, 30);
 
         lableSoTienNap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lableSoTienNap.setForeground(new java.awt.Color(255, 255, 0));
         lableSoTienNap.setText("Số tiền nạp");
         Taotaikhoan.add(lableSoTienNap);
-        lableSoTienNap.setBounds(340, 210, 130, 20);
+        lableSoTienNap.setBounds(270, 280, 130, 20);
 
         jButton4.setBackground(new java.awt.Color(153, 153, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -363,7 +436,7 @@ public class PnTaiKhoan extends javax.swing.JPanel {
             }
         });
         Taotaikhoan.add(jButton4);
-        jButton4.setBounds(640, 250, 110, 30);
+        jButton4.setBounds(570, 320, 110, 30);
 
         TaoTaiKhoan.setBackground(new java.awt.Color(0, 153, 255));
         TaoTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -374,7 +447,11 @@ public class PnTaiKhoan extends javax.swing.JPanel {
             }
         });
         Taotaikhoan.add(TaoTaiKhoan);
-        TaoTaiKhoan.setBounds(500, 250, 110, 30);
+        TaoTaiKhoan.setBounds(430, 320, 110, 30);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/anh3.gif"))); // NOI18N
+        Taotaikhoan.add(jLabel2);
+        jLabel2.setBounds(0, 0, 1006, 475);
 
         cacPanel.add(Taotaikhoan, "card3");
 
@@ -472,6 +549,9 @@ public class PnTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JPanel cacNuttaikhoan;
     private javax.swing.JPanel cacPanel;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lableNhapLaiMK;
     private javax.swing.JLabel lableNhapMatKhau;
     private javax.swing.JLabel lableNhapTaiKhoan;

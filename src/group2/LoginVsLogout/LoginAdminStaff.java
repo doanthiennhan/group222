@@ -66,6 +66,12 @@ public class LoginAdminStaff extends javax.swing.JPanel {
         LoginButton = new javax.swing.JButton();
         ForgetPasswordButton = new javax.swing.JButton();
         ExitButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(153, 255, 255));
+        setPreferredSize(new java.awt.Dimension(400, 300));
+        setLayout(null);
 
         staffToggleButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         staffToggleButton.setText("Staff");
@@ -74,6 +80,8 @@ public class LoginAdminStaff extends javax.swing.JPanel {
                 staffToggleButtonActionPerformed(evt);
             }
         });
+        add(staffToggleButton);
+        staffToggleButton.setBounds(308, 30, 85, 26);
 
         adminToggleButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         adminToggleButton.setText("Admin");
@@ -82,19 +90,39 @@ public class LoginAdminStaff extends javax.swing.JPanel {
                 adminToggleButtonActionPerformed(evt);
             }
         });
+        add(adminToggleButton);
+        adminToggleButton.setBounds(204, 30, 92, 25);
 
         LoginLable.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        LoginLable.setForeground(new java.awt.Color(255, 255, 51));
         LoginLable.setText("Đăng nhập với tư cách");
+        add(LoginLable);
+        LoginLable.setBounds(14, 29, 172, 23);
 
+        passwordLable.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        passwordLable.setForeground(new java.awt.Color(255, 255, 0));
         passwordLable.setText("Mật khẩu");
+        add(passwordLable);
+        passwordLable.setBounds(72, 155, 70, 25);
 
+        userNameField.setBackground(new java.awt.Color(153, 255, 255));
         userNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userNameFieldActionPerformed(evt);
             }
         });
+        add(userNameField);
+        userNameField.setBounds(195, 94, 129, 25);
 
+        passwordField.setBackground(new java.awt.Color(153, 255, 255));
+        add(passwordField);
+        passwordField.setBounds(195, 155, 129, 25);
+
+        userNameLable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        userNameLable.setForeground(new java.awt.Color(255, 255, 0));
         userNameLable.setText("Tên đăng nhập");
+        add(userNameLable);
+        userNameLable.setBounds(72, 94, 91, 25);
 
         LoginButton.setText("Đăng nhập");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +130,8 @@ public class LoginAdminStaff extends javax.swing.JPanel {
                 LoginButtonActionPerformed(evt);
             }
         });
+        add(LoginButton);
+        LoginButton.setBounds(34, 227, 100, 23);
 
         ForgetPasswordButton.setText("Quên Mật khẩu");
         ForgetPasswordButton.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +139,8 @@ public class LoginAdminStaff extends javax.swing.JPanel {
                 ForgetPasswordButtonActionPerformed(evt);
             }
         });
+        add(ForgetPasswordButton);
+        ForgetPasswordButton.setBounds(158, 227, 130, 23);
 
         ExitButton.setText("Thoát");
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -116,63 +148,16 @@ public class LoginAdminStaff extends javax.swing.JPanel {
                 ExitButtonActionPerformed(evt);
             }
         });
+        add(ExitButton);
+        ExitButton.setBounds(309, 227, 72, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(LoginLable)
-                        .addGap(18, 18, 18)
-                        .addComponent(adminToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(staffToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(userNameLable, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(passwordLable, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)
-                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(LoginButton)
-                        .addGap(32, 32, 32)
-                        .addComponent(ForgetPasswordButton)
-                        .addGap(33, 33, 33)
-                        .addComponent(ExitButton)))
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(adminToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(staffToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoginLable, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userNameLable, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLable, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LoginButton)
-                    .addComponent(ForgetPasswordButton)
-                    .addComponent(ExitButton))
-                .addContainerGap(76, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/hinh-nen-gaming-48.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, -70, 400, 420);
+
+        jLabel2.setText("jLabel2");
+        add(jLabel2);
+        jLabel2.setBounds(30, 130, 37, 16);
     }// </editor-fold>//GEN-END:initComponents
 
     private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
@@ -235,6 +220,8 @@ public class LoginAdminStaff extends javax.swing.JPanel {
     private javax.swing.JButton LoginButton;
     private javax.swing.JLabel LoginLable;
     private javax.swing.JToggleButton adminToggleButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordLable;
     private javax.swing.JToggleButton staffToggleButton;

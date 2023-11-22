@@ -40,15 +40,17 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         dangxuat = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         Parent = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 600));
-        jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 50));
+        jPanel2.setLayout(null);
 
         maytram.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         maytram.setText("Máy Trạm");
@@ -58,6 +60,8 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
                 maytramActionPerformed(evt);
             }
         });
+        jPanel2.add(maytram);
+        maytram.setBounds(6, 29, 93, 35);
 
         dichvu.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         dichvu.setText("Dịch vụ");
@@ -67,6 +71,8 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
                 dichvuActionPerformed(evt);
             }
         });
+        jPanel2.add(dichvu);
+        dichvu.setBounds(197, 29, 81, 35);
 
         baocao.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         baocao.setText("Báo cáo");
@@ -76,6 +82,8 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
                 baocaoActionPerformed(evt);
             }
         });
+        jPanel2.add(baocao);
+        baocao.setBounds(284, 29, 84, 35);
 
         taikhoan.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         taikhoan.setText("Tài khoản");
@@ -85,6 +93,8 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
                 taikhoanActionPerformed(evt);
             }
         });
+        jPanel2.add(taikhoan);
+        taikhoan.setBounds(105, 29, 86, 35);
 
         camweb.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         camweb.setText("Cấm web");
@@ -94,6 +104,8 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
                 camwebActionPerformed(evt);
             }
         });
+        jPanel2.add(camweb);
+        camweb.setBounds(460, 29, 90, 35);
 
         hotro.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         hotro.setText("Hổ trợ");
@@ -103,10 +115,16 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
                 hotroActionPerformed(evt);
             }
         });
+        jPanel2.add(hotro);
+        hotro.setBounds(374, 29, 80, 35);
 
         jTextField1.setText(" ");
+        jPanel2.add(jTextField1);
+        jTextField1.setBounds(618, 27, 80, 39);
 
         jTextField2.setText(" ");
+        jPanel2.add(jTextField2);
+        jTextField2.setBounds(716, 27, 80, 39);
 
         dangxuat.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         dangxuat.setText("Đăng xuất");
@@ -116,89 +134,49 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
                 dangxuatActionPerformed(evt);
             }
         });
+        jPanel2.add(dangxuat);
+        dangxuat.setBounds(864, 29, 120, 35);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(maytram, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(taikhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(baocao, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(hotro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(camweb, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(dangxuat, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(maytram, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(taikhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(baocao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(hotro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(camweb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(dangxuat, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 1000, 80);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/anh1.gif"))); // NOI18N
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(-3, -10, 1000, 80);
 
         Parent.setBackground(new java.awt.Color(255, 255, 255));
         Parent.setLayout(new java.awt.CardLayout());
-        jPanel1.add(Parent);
-        Parent.setBounds(0, 80, 1000, 520);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/anh23(ct).gif"))); // NOI18N
+        Parent.add(jLabel1, "card2");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Parent, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Parent, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -216,6 +194,7 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
     private void dichvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dichvuActionPerformed
         Parent.removeAll();
         PnDichVu dv = new PnDichVu();
+        dv.displayDataFromDatabase();
         Parent.add(dv);
         Parent.revalidate();
         Parent.repaint();
@@ -303,6 +282,8 @@ public class UI_StaffvsAD extends javax.swing.JFrame {
     private javax.swing.JButton dangxuat;
     private javax.swing.JButton dichvu;
     private javax.swing.JButton hotro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
